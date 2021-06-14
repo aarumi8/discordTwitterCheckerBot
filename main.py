@@ -232,6 +232,17 @@ def get_new_following():
     
     return result 
 
+def delete_user(user):
+    users = get_users()
+
+    if user in users:
+        users.remove(user)
+        with open("users.json", "w") as jsonFile:
+            json.dump(users, jsonFile)
+        return True
+    else:
+        return False
+
 
 from discord.ext import commands
 
@@ -259,5 +270,14 @@ async def update_users_following_message(ctx):
             await ctx.channel.send(res)
     else:
         await ctx.channel.send("No one has subscribed to anyone recently :(")
+
+
+@bot.command(name="delete")
+async def delete_user_message(ctx, arg):
+    if delete_user(arg):
+        await ctx.channel.send(arg + " is successfully deleted!")
+    else:
+        await ctx.channel.send("There is no such user")
+
 
 bot.run(TOKEN)
