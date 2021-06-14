@@ -225,10 +225,10 @@ def get_new_following():
             result_data = ""
 
             for item in data:
-                item = "https://twitter.com/" + item
+                item = "<https://twitter.com/" + item + ">"
                 result_data = result_data + item + "\n"
 
-            result.append("https://twitter.com/" + user + " is following new accounts:\n" + result_data)
+            result.append("<https://twitter.com/" + user + ">" + " is following new accounts:\n" + result_data)
     
     return result 
 
